@@ -48,14 +48,18 @@ ${product.reviews
   .join("\n\n")}`;
 
   const query = {
-    model: "pplx-7b-chat",
+    // Use one of these supported models:
+    model: "llama-3.1-sonar-large-128k-online",  // or model="llama-3.1-sonar-large-128k-online"
+    // model: "pplx-70b-chat",       // or
+    // model: "pplx-7b-online",      // or
+    // model: "codellama-34b-instruct",
     stream: true,
     messages: buildPrompt(prompt),
     max_tokens: 1000,
     temperature: 0.75,
     top_p: 1,
     frequency_penalty: 1,
-  } as const;
+} as const;
 
   return unstable_cache(async () => {
     const response = await perplexity.chat.completions.create(query);
